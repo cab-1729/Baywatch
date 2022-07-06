@@ -1,5 +1,7 @@
 # Baywatch
 
+![download](https://user-images.githubusercontent.com/60106638/177461320-e86d5ff0-1ed8-4e45-8858-32fbe09168c0.jpeg)
+
 A command-line program to browse torrents from the infamous [PirateBay](thepiratebay.org/index.html).
 
 Terminal colors are used to be aesthetically pleasing. The interface is designed to be as minimal as possible.
@@ -8,6 +10,8 @@ This project was heavily inspired by `torrtux`. In fact the whole reason why I w
 This project has no affiliation with the site _PirateBay_. The code for this project was written by reverse engineering the website.
 
 ## Usage
+
+_A `demonstration.cast` file is provided in the repo. This can be run with `asciinema` to get an idea what this looks like_
 
 1. Run the Perl script and you will be prompted for a search string.
 2. Above the prompt are displayed the categories that will be searched.
