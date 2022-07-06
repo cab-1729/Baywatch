@@ -66,6 +66,7 @@ for(;;){
 	print CLEAR,BRIGHT_YELLOW,"Audio: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Video: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Applications: ",BRIGHT_GREEN,"✔️\n",BRIGHT_YELLOW,"Games: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Porn: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Other: ",BRIGHT_GREEN,"✔️\n",CLEAR,"Pirate Search : ";
 	my $search=<STDIN>;
 	while($search=~/^\s*$/){#blank search, indicating user wants to change settings
+		$cats='';
 		ReadMode 'cbreak';
 		my $prompt;
 		print BRIGHT_YELLOW,"Audio: ",BRIGHT_GREEN;
@@ -162,6 +163,7 @@ for(;;){
 		print CLEAR,"Pirate Search : ";
 		$search=<STDIN>;
 	}
+	print 'https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3;#testing
 	my $search_results=parse_json $internet->get('https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3)->decoded_content;
 	if($search_results->[0]->{'id'}==0){
 		die 'No results returned';
