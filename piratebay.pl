@@ -6,6 +6,7 @@ use strict;
 use warnings;
 use LWP::UserAgent;
 use URI::Encode 'uri_encode';
+use HTML::Entities 'decode_entities';
 use JSON::Parse 'parse_json';
 use Term::ReadKey qw(ReadKey ReadMode);
 use Term::ANSIColor qw(CLEAR BOLD UNDERLINE ITALIC MAGENTA BRIGHT_MAGENTA BRIGHT_YELLOW BRIGHT_BLUE CYAN BRIGHT_CYAN BRIGHT_GREEN BRIGHT_RED BRIGHT_WHITE BRIGHT_BLACK ON_BRIGHT_WHITE);
@@ -163,7 +164,6 @@ for(;;){
 		print CLEAR,"Pirate Search : ";
 		$search=<STDIN>;
 	}
-	print 'https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3;#testing
 	my $search_results=parse_json $internet->get('https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3)->decoded_content;
 	if($search_results->[0]->{'id'}==0){
 		die 'No results returned';
@@ -205,7 +205,7 @@ for(;;){
 			last;;
 		}
 		my $number=int($input);
-		my $description=(parse_json $internet->get("https://apibay.org/t.php?id=".$search_results->[$number]->{'id'})->decoded_content)->{'descr'};
+		my $description=decode_entities((parse_json $internet->get("https://apibay.org/t.php?id=".$search_results->[$number]->{'id'})->decoded_content)->{'descr'});
 		my $item=$items[$#items-$number];
 		my $torrent_name=$item->[1];
 		my $search_item=$search_results->[$number];
