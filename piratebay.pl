@@ -1,6 +1,7 @@
 #!/bin/perl
 #TODO: make it work under tor
 #TODO: check if magnet links are region independent
+#TODO: fix alignment of categories shown first time
 use strict;
 use warnings;
 use LWP::UserAgent;
@@ -61,7 +62,7 @@ my %categories=(
 	699=>"Other>Other",
 );
 for(;;){
-	my $cats='';
+	my $cats='   ';
 	print CLEAR,BRIGHT_YELLOW,"Audio: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Video: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Applications: ",BRIGHT_GREEN,"✔️\n",BRIGHT_YELLOW,"Games: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Porn: ",BRIGHT_GREEN,"✔️\t",BRIGHT_YELLOW,"Other: ",BRIGHT_GREEN,"✔️\n",CLEAR,"Pirate Search : ";
 	my $search=<STDIN>;
 	while($search=~/^\s*$/){#blank search, indicating user wants to change settings
