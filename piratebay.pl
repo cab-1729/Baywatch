@@ -1,6 +1,5 @@
 #!/bin/perl
 #TODO: make it work under tor
-#TODO: check if magnet links are region independent
 #TODO: fix alignment of categories shown first time
 use strict;
 use warnings;
@@ -11,7 +10,6 @@ use JSON::Parse 'parse_json';
 use Term::ReadKey qw(ReadKey ReadMode);
 use Term::ANSIColor qw(CLEAR BOLD UNDERLINE ITALIC MAGENTA BRIGHT_MAGENTA BRIGHT_YELLOW BRIGHT_BLUE CYAN BRIGHT_CYAN BRIGHT_GREEN BRIGHT_RED BRIGHT_WHITE BRIGHT_BLACK ON_BRIGHT_WHITE);
 use Number::Format 'format_bytes';
-use YAML::Tiny;
 use Clipboard;
 use Switch;
 my $internet=LWP::UserAgent->new();
