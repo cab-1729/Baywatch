@@ -45,7 +45,6 @@ Perl and Perl modules:
 + Term::ReadKey
 + Term::ANSIColor
 + Number::Format
-+ YAML::Tiny
 + Clipboard
 
 ## Contributing
