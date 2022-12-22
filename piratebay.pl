@@ -3,7 +3,7 @@
 #TODO: fix alignment of categories shown first time
 use strict;
 use warnings;
-use LWP::UserAgent;
+use HTTP::Tiny;
 use URI::Encode 'uri_encode';
 use HTML::Entities 'decode_entities';
 use JSON::Parse 'parse_json';
@@ -12,8 +12,7 @@ use Term::ANSIColor qw(CLEAR BOLD UNDERLINE ITALIC MAGENTA BRIGHT_MAGENTA BRIGHT
 use Number::Format 'format_bytes';
 use Clipboard;
 use Switch;
-my $internet=LWP::UserAgent->new();
-$internet->agent('Dont Block Me');#arbitrary user string
+my $internet=HTTP::Tiny->new;
 my %categories=(
 	101=>"Audio>Music",
 	102=>"Audio>Audio book",
@@ -162,7 +161,7 @@ for(;;){
 		print CLEAR,"Pirate Search : ";
 		$search=<STDIN>;
 	}
-	my $search_results=parse_json $internet->get('https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3)->decoded_content;
+	my $search_results=parse_json $internet->get('https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3)->{content};
 	if($search_results->[0]->{'id'}==0){
 		die 'No results returned';
 	}
@@ -203,7 +202,7 @@ for(;;){
 			last;;
 		}
 		my $number=int($input);
-		my $description=decode_entities((parse_json $internet->get("https://apibay.org/t.php?id=".$search_results->[$number]->{'id'})->decoded_content)->{'descr'});
+		my $description=decode_entities(parse_json($internet->get("https://apibay.org/t.php?id=".$search_results->[$number]->{'id'})->{content})->{'descr'});
 		my $item=$items[$#items-$number];
 		my $torrent_name=$item->[1];
 		my $search_item=$search_results->[$number];
