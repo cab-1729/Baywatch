@@ -163,7 +163,8 @@ for(;;){
 	}
 	my $search_results=parse_json $internet->get('https://apibay.org/q.php?q='.uri_encode($search)."&cat=".substr $cats,3)->{content};
 	if($search_results->[0]->{'id'}==0){
-		die 'No results returned';
+		print "Nothing found.\n";
+		redo;
 	}
 	my @items=();
 	#Not showing username and number of files
