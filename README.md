@@ -46,6 +46,8 @@ Perl and Perl modules:
 + Term::ANSIColor
 + Number::Format
 + Clipboard
++ IO::Socket::SSL
++ Net::SSLeay
 
 ## Contributing
 
